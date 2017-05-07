@@ -1,0 +1,6 @@
+{
+  "dependencies": [
+    "https://fonts.googleapis.com/css?family=Lato",
+    "highlight.js/styles/atom-one-dark.css"
+  ]
+}

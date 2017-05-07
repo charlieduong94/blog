@@ -1,0 +1,26 @@
+{
+  "name": "blogggg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Charlie Duong",
+  "license": "MIT",
+  "dependencies": {
+    "bunyan": "^1.8.10",
+    "colors": "^1.1.2",
+    "highlight.js": "^9.11.0",
+    "koa": "^2.2.0",
+    "koa-mount": "^3.0.0",
+    "koa-static": "^3.0.0",
+    "lasso": "^2.11.10",
+    "lasso-less": "^2.4.3",
+    "lasso-marko": "^2.3.0",
+    "marked": "^0.3.6",
+    "marko": "^4.2.8",
+    "mkdirp": "^0.5.1",
+    "require-self-ref": "^2.0.1"
+  }
+}
