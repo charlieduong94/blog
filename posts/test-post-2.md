@@ -1,7 +1,7 @@
-# test post number 2
+# This is a test
 
-```
-async function testAsync () {
-  await testing()
-}
+```js
+const js = require('js')
+
+console.log('this is javascript')
 ```

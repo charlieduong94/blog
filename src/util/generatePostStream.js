@@ -1,15 +1,9 @@
 const fs = require('fs')
+const yaml = require('js-yaml')
 const logger = require('~/src/logging').logger(module)
-const highlight = require('highlight.js')
-const Post = require('~/src/pages/post')
+const PostPage = require('~/src/pages/post')
 
-const marked = require('marked')
-const renderer = new marked.Renderer()
-
-renderer.code = (code) => {
-  const highlightedCode = highlight.highlightAuto(code).value
-  return `<pre><code class='hljs'>${highlightedCode}</code></pre>`
-}
+const renderMarkdown = require('~/src/util/renderMarkdown')
 
 async function readFileAsync (fileName) {
   return new Promise((resolve, reject) => {
@@ -24,9 +18,12 @@ async function readFileAsync (fileName) {
 
 module.exports = async (filePath) => {
   const rawPost = await readFileAsync(filePath)
-  const postContent = marked(rawPost, { renderer })
+  const postContent = renderMarkdown(rawPost)
+  const sidebarContent = renderMarkdown("```js\nrequire('charlie.af')\n```")
+  console.log(sidebarContent)
 
-  return Post.stream({
-    content: postContent
+  return PostPage.stream({
+    sidebarContent,
+    postContent
   })
 }

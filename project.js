@@ -80,6 +80,7 @@ exports.serve = async (port) => {
         ctx.set('Content-Type', 'text/html')
         ctx.body = await generatePostStream(`${POSTS_INPUT_DIR}/${fileName}`)
       } catch (err) {
+        console.error(err)
         ctx.body = 'Not found'
       }
     }

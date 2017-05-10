@@ -6,8 +6,11 @@ html
     meta name='viewport' content='width=device-width, initial-scale=1'
     lasso-head
   body
-    div.post
-      div.post-content
-        -- $!{input.content}
+    div.blog
+      sidebar
+        -- $!{input.sidebarContent}
+      div.post
+        div.post-content
+          -- $!{input.postContent}
     lasso-body
     init-components
