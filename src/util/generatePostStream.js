@@ -19,11 +19,8 @@ async function readFileAsync (fileName) {
 module.exports = async (filePath) => {
   const rawPost = await readFileAsync(filePath)
   const postContent = renderMarkdown(rawPost)
-  const sidebarContent = renderMarkdown("```js\nrequire('charlie.af')\n```")
-  console.log(sidebarContent)
 
   return PostPage.stream({
-    sidebarContent,
     postContent
   })
 }

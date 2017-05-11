@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  color: @accent-color;
+  border-bottom: 1px solid #D9D9D9;
+}
+
+.header-accent-bar {
+  background-color: #FB503B;
+  height: 5px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  padding: 9px;
+  //background-color: #282C34;
+  font-family: Consolas, Monaco, Lucida Console, Liberation Mono,
+    DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New;
+
+  @media (max-width: 400px) {
+    flex-direction: column;
+  }
+
+  @media (min-width: 400px) {
+    flex-direction: row;
+  }
+}
+
+h2.header-title {
+  color: @accent-color;
+  flex: 1 1 0;
+  margin: 5px;
+}
+
