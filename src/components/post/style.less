@@ -6,10 +6,17 @@
 
 .post-body {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   padding: 10px;
-  max-width: 1000px;
+  max-width: 1200px;
+
+  @media(min-width: 700px) {
+    flex-direction: row;
+  }
+
+  @media(max-width: 700px) {
+    flex-direction: column;
+  }
 }
 
 .post-sidebar {
@@ -17,8 +24,15 @@
 }
 
 .post-sidebar-content {
-  border-right: 1px solid gray;
   padding: 10px;
+
+  @media(min-width: 700px) {
+    border-right: 1px solid gray;
+  }
+
+  @media(max-width: 700px) {
+    border-bottom: 1px solid gray;
+  }
 }
 
 .post-content {
