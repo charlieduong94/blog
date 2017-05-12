@@ -6,9 +6,14 @@ html
     meta name='viewport' content='width=device-width, initial-scale=1'
     lasso-head
   body
-    div.blog
-      header
-      post
-        -- $!{input.postContent}
+    header
+    post [
+      title=input.title
+      description=input.description
+      date=input.date
+    ]
+      -- $!{input.postContent}
     lasso-body
     init-components
+    browser-refresh enabled='true'
+

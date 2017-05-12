@@ -5,6 +5,8 @@ const PostPage = require('~/src/pages/post')
 
 const renderMarkdown = require('~/src/util/renderMarkdown')
 
+const metaDataDelimiter = '---'
+
 async function readFileAsync (fileName) {
   return new Promise((resolve, reject) => {
     return fs.readFile(fileName, 'utf8', (err, data) => {
@@ -18,9 +20,21 @@ async function readFileAsync (fileName) {
 
 module.exports = async (filePath) => {
   const rawPost = await readFileAsync(filePath)
-  const postContent = renderMarkdown(rawPost)
+  const rawPostMetaData = rawPost.slice(0, rawPost.indexOf('---'))
+  const rawPostContent = rawPost.slice(rawPost.indexOf('---') + metaDataDelimiter.length)
+
+  const {
+    title,
+    description,
+    date
+  } = yaml.safeLoad(rawPostMetaData)
+
+  const postContent = renderMarkdown(rawPostContent)
 
   return PostPage.stream({
+    title,
+    description,
+    date,
     postContent
   })
 }

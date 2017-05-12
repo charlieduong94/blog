@@ -12,7 +12,7 @@ const mount = require('koa-mount')
 
 const mkdirp = require('mkdirp')
 const fs = require('fs')
-const generatePostStream = require('~/src/util/generatePostStream')
+const createPostStream = require('~/src/util/createPostStream')
 const logger = require('~/src/logging').logger(module)
 
 const POSTS_INPUT_DIR = `${__dirname}/posts`
@@ -38,7 +38,7 @@ async function writePost (post) {
 
   logger.info('Generating post', outputFileName)
 
-  const postStream = await generatePostStream(`${POSTS_INPUT_DIR}/${post}`)
+  const postStream = await createPostStream(`${POSTS_INPUT_DIR}/${post}`)
   const writeStream = fs.createWriteStream(`${POSTS_OUTPUT_DIR}/${outputFileName}`)
 
   const writePromise = new Promise((resolve, reject) => {
@@ -69,16 +69,23 @@ exports.serve = async (port) => {
   const router = new Router()
 
   router.register({
+    path: '/',
+    async handler (ctx) {
+      ctx.set('Content-Type', 'text/html')
+      ctx.body = await require('~/src/pages/index').stream({})
+    }
+  })
+
+  router.register({
     path: '/posts/:postName',
-    handler: async (ctx) => {
+    async handler (ctx) {
       const [ postName ] = ctx.params
-      const endPos = postName.lastIndexOf('.html')
-      const fileName = `${postName.slice(0, endPos)}.md`
+      const fileName = `${postName}.md`
       logger.info('Generating', fileName)
 
       try {
         ctx.set('Content-Type', 'text/html')
-        ctx.body = await generatePostStream(`${POSTS_INPUT_DIR}/${fileName}`)
+        ctx.body = await createPostStream(`${POSTS_INPUT_DIR}/${fileName}`)
       } catch (err) {
         console.error(err)
         ctx.body = 'Not found'
@@ -92,6 +99,9 @@ exports.serve = async (port) => {
   return new Promise((resolve) => {
     app.listen(port, () => {
       logger.info(`Server is listening on port ${port}...`)
+      if (process.send) {
+        process.send('online')
+      }
       resolve()
     })
   })
