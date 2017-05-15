@@ -4,9 +4,10 @@ const colors = require('colors')
 colors.setTheme({
   info: 'green',
   warn: 'yellow',
-  error: 'orange',
-  fatal: 'red',
-  debug: 'blue'
+  debug: 'blue',
+  error: 'red',
+  debug: 'blue',
+  fatal: 'rainbow'
 })
 
 const LEVELS = {
@@ -33,8 +34,9 @@ class PrettyStream extends Stream {
     } = data
 
     const logLevel = LEVELS[level]
-    const coloredFile = `[ ${file} ]`.green
-    this.emit('data', `${time.toISOString().blue} ${coloredFile} [${logLevel[logLevel]}] ${msg}\n`)
+    const coloredFile = colors.green(`[ ${file} ]`)
+    this.emit('data', `${colors.blue(time.toISOString())} ${coloredFile} ` +
+      `[${colors[logLevel](logLevel)}] ${msg}\n`)
   }
 
   end () {

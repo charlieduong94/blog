@@ -1,5 +1,5 @@
-title: this is a test post
-description: this is a decently long description of a post
+title: Test post number 2
+description: this is the second post in the list
 date: April 4th, 20XX
 
 ---
