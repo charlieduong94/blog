@@ -94,6 +94,7 @@ async function parsePost (filePath) {
 
 async function writePost (postData, outputDir) {
   logger.info('Generating post', outputDir)
+  await mkdirp(outputDir)
   const postStream = PostPage.stream(postData)
   return writeFile(postStream, `${outputDir}/index.html`)
 }
