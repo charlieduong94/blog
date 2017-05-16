@@ -1,6 +1,6 @@
 $ const posts = input.posts
-$ const prevPage = input.prevPage
-$ const nextPage = input.nextPage
+$ const prevPageLink = input.prevPageLink
+$ const nextPageLink = input.nextPageLink
 
 div.post-list
   div.posts
@@ -10,10 +10,13 @@ div.post-list
         h2 -- ${post.title}
         p -- ${post.date}
         p -- ${post.description}
-        a.read-more-link href='${post.link}' -- Read more
+        a.read-more-link href='${post.path}' -- Read more
     div.links-container
-      if(input.prevPage)
-        a.prev-page-link href='/posts/${input.prevPage}' -- Previous Page
-      if(input.nextPage)
-        a.next-page-link href='/posts/${input.nextPage}' -- Next Page
-
+      if(prevPageLink)
+        a.page-link href=prevPageLink
+          i.fa.fa-2x.fa-chevron-left
+          -- Previous Page
+      if(nextPageLink)
+        a.page-link.next href=nextPageLink
+          -- Next Page
+          i.fa.fa-2x.fa-chevron-right
