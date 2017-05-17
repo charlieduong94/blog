@@ -10,7 +10,7 @@ const glob = require('glob')
 const logger = require('~/src/logging').logger(module)
 
 const DIST_DIR = path.normalize(path.join(__dirname, `..`, 'dist'))
-const BUCKET_NAME = 'charlie-af'
+const BUCKET_NAME = 'www.charlie.af'
 const CONCURRENCY = 5
 
 async function getFiles (globPath) {
