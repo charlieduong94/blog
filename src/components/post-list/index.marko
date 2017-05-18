@@ -7,10 +7,11 @@ div.post-list
     for(let i = 0; i < posts.length; i++)
       $ const post = posts[i]
       div.post-item
-        h2 -- ${post.title}
+        a href=post.path
+          h2 -- ${post.title}
         p -- ${post.date}
         p -- ${post.description}
-        a.read-more-link href='${post.path}' -- Read more
+        a.read-more-link href=post.path -- Read more
     div.links-container
       if(prevPageLink)
         a.page-link href=prevPageLink
